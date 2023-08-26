@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from "react";
 
 const useIdle = (delay: number) => {
-  //state to read and update the idle state
   const [isIdle, setIsIdle] = useState(false);
 
   const timeoutId = useRef<string | null>(null);
