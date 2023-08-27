@@ -9,16 +9,16 @@ const Page = () => {
     <ProtectedRoute>
 
       <>
-      <Header idle={idle} />
-      <Image
-      className="mt-8 ml-48"
-      src={"/assets/welcome.svg"}
-      alt="welcome"
-      width={1000}
-      height={700}
-      />
+        <Header idle={idle} />
+        <Image
+          className="mt-8 ml-48"
+          src={"/assets/welcome.svg"}
+          alt="welcome"
+          width={1000}
+          height={700}
+        />
       </>
-      </ProtectedRoute>
+    </ProtectedRoute>
   );
 };
 
