@@ -18,18 +18,23 @@ const router = useRouter();
 const {data:session} = useSession();
 
   const handleClick = async(event:React.SyntheticEvent)=>{
-    
   event && event.preventDefault();
 
     try{
       console.log('try blog')
     await login(loginCredentials.email,loginCredentials.password);
     toast('logged in successfully!');
-    setTimeout(() => {
-      router.push('/main');
-    }, 1000);
+    setLoginCredentials({
+        email:'',
+        password:''
+      })
+      router.push('/');
     }catch(error){
       toast('invalid credentails!')
+       setLoginCredentials({
+        email:'',
+        password:''
+      })
       console.log(error)
     }
   }
@@ -38,12 +43,16 @@ console.log(session?.user)
 
     try{
         await signIn();
-        router.push('/main')
+        router.push('/')
     }catch(error){
         console.log(error)
     }
   }
 
+  const handleGoogleHome = (event:React.SyntheticEvent)=>{
+event && event.preventDefault();
+router.push('/')
+  }
   return (
     <>
       <div className="flex flex-col h-full w-full justify-center items-center border lg:w-3/4 lg:h-3/4 rounded absolute lg:top-[10%] lg:left-[10%] shadow-lg sm:flex-row md:flex-row lg:flex-row xl:flex-row ">
@@ -90,7 +99,7 @@ console.log(session?.user)
               Login{" "}
             </button>
 
-            {!session?.user &&  <button className="border border-blue-800 bg-white-700 rounded text-blue p-2 m-1 w-full mb-2 flex flex-row justify-evenly items-center"
+            {!session?.user ? <button className="border border-blue-800 bg-white-700 rounded text-blue p-2 m-1 w-full mb-2 flex flex-row justify-evenly items-center"
             onClick={handleGoogleLogin}>
               {" "}
               <Image
@@ -100,6 +109,10 @@ console.log(session?.user)
               height={20}
               />
               <p className="text-blue-800 font-semibold">continue with Google</p>
+            </button> : <button className="bg-blue-700 rounded text-white p-2 m-1 w-full mb-2"
+             onClick={handleGoogleHome}>
+              {" "}
+              Welcome {session.user.name } Go to Home {" "}
             </button> }
             
             <p>

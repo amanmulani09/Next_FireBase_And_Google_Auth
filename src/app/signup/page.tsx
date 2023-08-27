@@ -26,9 +26,19 @@ event && event.preventDefault();
       console.log('try blog')
     await createUser(signUpCredentials.email,signUpCredentials.password);
     toast('account created successfully!')
-      router.push('/main');
-    }catch(error){
+      router.push('/');
+      setSignUpCredentials({
+        name:'',
+        email:'',
+        password:''
+      })
+    }catch(error:any){
       toast(error.message)
+      setSignUpCredentials({
+        name:'',
+        email:'',
+        password:''
+      })
       console.log(error)
     }
 
@@ -112,7 +122,7 @@ event && event.preventDefault();
               {" "}
               Already have an Account?{" "}
               <Link
-                href="/"
+                href="/login"
                 className="text-blue-700 border-b border-blue-600"
               >
                 {" "}

@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 
 const useIdle = (delay: number) => {
   const [isIdle, setIsIdle] = useState(false);
-
   const timeoutId = useRef<string | null>(null);
 
   const goInActive = () => {

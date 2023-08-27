@@ -1,20 +1,22 @@
 'use client'
-import {useEffect} from 'react'
+import {useEffect,useRef} from 'react'
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from 'react-toastify';
+import { signOut,useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
 const Header = ({idle}:{idle:boolean})=>{
 const {user,logout}:any = useAuth();
 const router = useRouter();
-const userName = user && user.email.split('@')[0]
-
-
+const {data:session} = useSession();
+const userName = user ? user : session?.user?.name
+const timerId = useRef<any | null>(null);
 const handleLogout = async()=>{
     try{
         await logout();
         toast('log out successfully!')
-            router.push('/')
+        router.push('/login')
+        signOut();
 
     }catch(error){
         toast('something went wrong')
@@ -23,13 +25,14 @@ const handleLogout = async()=>{
 }
 
 useEffect(()=>{
-    if(idle){
-        handleLogout();
-        setTimeout(()=>{
-            router.push('/')
-        },100)
-    }
 
+    timerId.current = setInterval(()=>{
+        console.log('hello')
+    })
+    if(idle){
+        clearInterval(timerId.current)
+        handleLogout();
+    }
 },[idle])
 
     return(
