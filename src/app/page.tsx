@@ -6,7 +6,8 @@ import Image from "next/image"
 const Page = () => {
   const idle = useIdle(60000);
   return (
-   <ProtectedRoute>
+    <ProtectedRoute>
+
       <>
       <Header idle={idle} />
       <Image
@@ -17,7 +18,7 @@ const Page = () => {
       height={700}
       />
       </>
-    </ProtectedRoute>
+      </ProtectedRoute>
   );
 };
 

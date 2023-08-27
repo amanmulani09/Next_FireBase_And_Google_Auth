@@ -21,7 +21,6 @@ const {data:session} = useSession();
   event && event.preventDefault();
 
     try{
-      console.log('try blog')
     await login(loginCredentials.email,loginCredentials.password);
     toast('logged in successfully!');
     setLoginCredentials({
@@ -38,7 +37,6 @@ const {data:session} = useSession();
       console.log(error)
     }
   }
-console.log(session?.user)
   const handleGoogleLogin = async()=>{
 
     try{
